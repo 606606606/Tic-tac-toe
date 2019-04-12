@@ -140,22 +140,24 @@ function draw() {
 }
 
 function mousePressed() {
+  if (mainLoop) {
 
-  for (let cell of grid) {
-    if (cell.insideCell(mouseX, mouseY)) {
-      playerCenterMouse.push(cell.center);
-      // pushes the center because circles need center positions to draw them as opose with rects.
-      playerMoves.push([cell.x, cell.y]);
+    for (let cell of grid) {
+      if (cell.insideCell(mouseX, mouseY)) {
+        playerCenterMouse.push(cell.center);
+        // pushes the center because circles need center positions to draw them as opose with rects.
+        playerMoves.push([cell.x, cell.y]);
 
-      // this compares the objects of positions and pushes the numeric value of the cell the player has placed its move. For instance, it pushes whole numbers like 4, 5, 6 into an array.
-      for (let key of Object.keys(numericPositions)) {
-        if (numericPositions[key][0] === cell.x && numericPositions[key][1] === cell.y) {
-          let index = posiblePlaces.indexOf(parseInt(key));
-          playerNumericMoves.push(parseInt(key));
-          posiblePlaces.splice(index, 1);
+        // this compares the objects of positions and pushes the numeric value of the cell the player has placed its move. For instance, it pushes whole numbers like 4, 5, 6 into an array.
+        for (let key of Object.keys(numericPositions)) {
+          if (numericPositions[key][0] === cell.x && numericPositions[key][1] === cell.y) {
+            let index = posiblePlaces.indexOf(parseInt(key));
+            playerNumericMoves.push(parseInt(key));
+            posiblePlaces.splice(index, 1);
+          }
         }
-      }
 
+      }
     }
   }
 }
